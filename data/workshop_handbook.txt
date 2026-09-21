@@ -1,0 +1,31 @@
+AI APPLICATION WORKSHOP HANDBOOK
+
+Workshop format
+The workshop is a hands-on Python seminar. Attendees will alternate between short explanations and guided coding exercises. Participants may use Visual Studio Code, JupyterLab, or Google Colab. The instructor's examples are distributed as Jupyter notebooks.
+
+Technical prerequisites
+Participants should be comfortable reading basic Python, calling functions, using lists and dictionaries, and installing packages with pip. Prior experience with Retrieval-Augmented Generation is not required. A working Python environment and internet connection are required.
+
+OpenAI access
+Each participant must use an individual OpenAI API Platform key. The API key must be stored in an environment variable and must not be pasted into source code or shared in screenshots. A small prepaid API balance is sufficient for the workshop exercises.
+
+Document workflow
+The sample application loads text documents, splits them into overlapping chunks, converts the chunks into embeddings, and stores the vectors in a FAISS index. At question time, the application embeds the question, retrieves the most relevant chunks, and sends those chunks to a language model as context.
+
+Retrieval settings
+The default chunk size is 800 characters with an overlap of 120 characters. The retriever returns the four most relevant chunks. These values are starting points rather than universal best settings. Participants will compare alternative chunk sizes and top-k values.
+
+Grounding and reliability
+The generation prompt instructs the model to answer only from retrieved context. When the context does not contain enough evidence, the model should say that the answer is not available in the supplied documents. Responses should include source labels so that a user can inspect the supporting text.
+
+Data handling
+Do not upload confidential, regulated, client-identifying, or proprietary documents unless the workshop organizer and your employer have explicitly approved the workflow. Use the supplied public or fictional documents for practice.
+
+Equipment
+Bring a charged laptop, its charger, and any electrical plug adapter required by the workshop location. A small extension lead or compact power strip can be useful when table outlets are limited. Headphones are optional.
+
+Troubleshooting
+If a notebook cannot find a package, first verify that Visual Studio Code is using the same Python interpreter or Jupyter kernel where the package was installed. If an API request fails, verify the API key, account credit, selected model, internet access, and any corporate proxy restrictions.
+
+Completion goal
+By the end of the workshop, participants should be able to explain the indexing and query phases of RAG, inspect retrieved chunks, build a local FAISS index, generate a grounded answer, and identify common failure modes such as poor chunking, weak retrieval, missing evidence, and prompt injection inside documents.

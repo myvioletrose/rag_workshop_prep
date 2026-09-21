@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG Workshop Prep - Under 5 Hours</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --muted: #64748b;
+      --card: #ffffff;
+      --bg: #f1f5f9;
+      --text: #0f172a;
+      --border: #cbd5e1;
+      --success: #15803d;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --card: #111827;
+        --bg: #030712;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --border: #374151;
+        --accent-soft: rgba(96, 165, 250, 0.16);
+        --success: #4ade80;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main { max-width: 1040px; margin: 0 auto; padding: 32px 20px 72px; }
+    h1 { margin: 0 0 4px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.08; }
+    h2 { margin-top: 34px; }
+    h3 { margin: 8px 0 10px; }
+    .subtitle { color: var(--muted); margin: 0 0 20px; }
+    .notice {
+      border-left: 5px solid var(--accent);
+      background: var(--card);
+      padding: 16px 18px;
+      border-radius: 10px;
+    }
+    .progress-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 16px 0;
+    }
+    .progress-row { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+    .progress-track {
+      height: 12px;
+      background: rgba(100, 116, 139, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--accent);
+      transition: width 180ms ease;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(390px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.06);
+    }
+    .time { font-weight: 750; color: var(--accent); }
+    .checkpoint {
+      border-top: 1px solid var(--border);
+      margin-top: 14px;
+      padding-top: 12px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    label { display: flex; gap: 10px; align-items: flex-start; margin: 11px 0; }
+    input[type="checkbox"] { margin-top: 5px; transform: scale(1.15); flex: 0 0 auto; }
+    .label-text { min-width: 0; }
+    a { color: var(--accent); text-underline-offset: 2px; }
+    a:hover { text-decoration-thickness: 2px; }
+    .resource {
+      display: block;
+      border: 1px solid var(--border);
+      background: var(--accent-soft);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin: 9px 0;
+      text-decoration: none;
+    }
+    .resource:hover { border-color: var(--accent); }
+    .badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    code, pre { font-family: "Cascadia Code", Consolas, monospace; }
+    code { overflow-wrap: anywhere; word-break: break-word; }
+    pre { overflow: auto; background: rgba(100, 116, 139, 0.12); padding: 14px; border-radius: 10px; }
+    .notes {
+      min-height: 140px;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      background: rgba(100, 116, 139, 0.07);
+    }
+    .small { font-size: 0.92rem; color: var(--muted); }
+    .total { color: var(--success); font-weight: 800; }
+    .optional { opacity: 0.9; }
+    button {
+      border: 0;
+      border-radius: 9px;
+      padding: 10px 14px;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      font-weight: 650;
+    }
+    .resource-table { width: 100%; border-collapse: collapse; }
+    .resource-table th, .resource-table td {
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      padding: 11px 8px;
+    }
+    .resource-table th { color: var(--muted); font-size: 0.9rem; }
+    @media (max-width: 640px) {
+      .resource-table, .resource-table thead, .resource-table tbody, .resource-table th, .resource-table td, .resource-table tr { display: block; }
+      .resource-table thead { display: none; }
+      .resource-table td { padding: 7px 0; border: 0; }
+      .resource-table tr { border-bottom: 1px solid var(--border); padding: 9px 0; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>RAG Workshop Prep</h1>
+  <p class="subtitle"><strong>4 hours 30 minutes total</strong>, including a 10-minute break. Progress and notes are saved in this browser.</p>
+
+  <div class="notice">
+    <strong>Your target:</strong> understand the end-to-end RAG flow, run one document-based RAG example in VS Code, inspect retrieved chunks, and recognize whether a bad answer came from retrieval or generation.
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-row">
+      <strong>Core preparation progress</strong>
+      <span id="progressText">0 of 0 complete</span>
+    </div>
+    <div class="progress-track" aria-hidden="true"><div id="progressFill" class="progress-fill"></div></div>
+  </div>
+
+  <h2>Under-5-hour study plan</h2>
+  <div class="grid">
+    <section class="card">
+      <div class="time">1 · 25 minutes</div>
+      <h3>Set up VS Code</h3>
+      <label><input type="checkbox" data-key="s1a"><span class="label-text">Create and select the <code>.venv</code> environment.</span></label>
+      <label><input type="checkbox" data-key="s1b"><span class="label-text">Install packages with <code>python -m pip install -r requirements.txt</code>.</span></label>
+      <label><input type="checkbox" data-key="s1c"><span class="label-text">Run <code>python check_setup.py</code>.</span></label>
+      <a class="resource" href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks" target="_blank" rel="noreferrer">VS Code: Jupyter Notebooks <span class="badge">skim 5 min</span></a>
+      <div class="checkpoint"><strong>Checkpoint:</strong> your notebook kernel and Python interpreter both point to the same <code>.venv</code>.</div>
+    </section>
+
+    <section class="card">
+      <div class="time">2 · 30 minutes</div>
+      <h3>Build the RAG mental model</h3>
+      <label><input type="checkbox" data-key="s2a"><span class="label-text">Watch the overview video.</span></label>
+      <a class="resource" href="https://www.youtube.com/watch?v=wd7TZ4w1mSw" target="_blank" rel="noreferrer">LangChain RAG From Scratch: Part 1 - Overview <span class="badge">5:13</span></a>
+      <label><input type="checkbox" data-key="s2b"><span class="label-text">Read only the retrieval pipeline, building blocks, and 2-step RAG sections.</span></label>
+      <a class="resource" href="https://docs.langchain.com/oss/python/langchain/retrieval" target="_blank" rel="noreferrer">LangChain retrieval overview <span class="badge">read 10 min</span></a>
+      <label><input type="checkbox" data-key="s2c"><span class="label-text">Draw the indexing path and question-answering path from memory.</span></label>
+      <div class="checkpoint"><strong>Checkpoint:</strong> explain where document loading, chunking, embeddings, FAISS, retrieval, and generation occur.</div>
+    </section>
+
+    <section class="card">
+      <div class="time">3 · 45 minutes</div>
+      <h3>Embeddings and FAISS</h3>
+      <label><input type="checkbox" data-key="s3a"><span class="label-text">Read the introductory embedding concepts and one API example.</span></label>
+      <a class="resource" href="https://developers.openai.com/api/docs/guides/embeddings" target="_blank" rel="noreferrer">OpenAI vector embeddings guide <span class="badge">read 10 min</span></a>
+      <label><input type="checkbox" data-key="s3b"><span class="label-text">Skim the FAISS sections on building an index, adding vectors, and searching.</span></label>
+      <a class="resource" href="https://github.com/facebookresearch/faiss/wiki/Getting-started" target="_blank" rel="noreferrer">FAISS getting started <span class="badge">read 8 min</span></a>
+      <label><input type="checkbox" data-key="s3c"><span class="label-text">Run <code>01_semantic_search_faiss.py</code> and inspect the top results.</span></label>
+      <div class="checkpoint"><strong>Checkpoint:</strong> explain embeddings, vector similarity, and what <code>top-k</code> means.</div>
+    </section>
+
+    <section class="card">
+      <div class="time">4 · 40 minutes</div>
+      <h3>Chunking and retrieval</h3>
+      <label><input type="checkbox" data-key="s4a"><span class="label-text">Watch the indexing and retrieval videos.</span></label>
+      <a class="resource" href="https://www.youtube.com/watch?v=bjb_EMsTDKI" target="_blank" rel="noreferrer">Part 2 - Indexing <span class="badge">4:52</span></a>
+      <a class="resource" href="https://www.youtube.com/watch?v=LxNVgdIz9sU" target="_blank" rel="noreferrer">Part 3 - Retrieval <span class="badge">5:14</span></a>
+      <label><input type="checkbox" data-key="s4b"><span class="label-text">In the exercise, compare two chunk sizes and two values of <code>k</code>.</span></label>
+      <label><input type="checkbox" data-key="s4c"><span class="label-text">Write one sentence about the tradeoff between chunks that are too small and too large.</span></label>
+      <div class="checkpoint"><strong>Checkpoint:</strong> explain chunk size, overlap, metadata, and why retrieval quality matters.</div>
+    </section>
+
+    <section class="card">
+      <div class="time">Break · 10 minutes</div>
+      <h3>Step away</h3>
+      <label><input type="checkbox" data-key="break1"><span class="label-text">Take a short break before the full build.</span></label>
+      <p class="small">This break is included in the 4-hour-30-minute total.</p>
+    </section>
+
+    <section class="card">
+      <div class="time">5 · 70 minutes</div>
+      <h3>Run an end-to-end RAG application</h3>
+      <label><input type="checkbox" data-key="s5a"><span class="label-text">Skim the official tutorial sections on documents, embeddings, splitting, vector search, retrievers, and minimal RAG.</span></label>
+      <a class="resource" href="https://docs.langchain.com/oss/python/langchain/knowledge-base" target="_blank" rel="noreferrer">LangChain semantic-search and minimal-RAG tutorial <span class="badge">skim 15 min</span></a>
+      <label><input type="checkbox" data-key="s5b"><span class="label-text">Run <code>02_langchain_rag.py</code> or the matching notebook cells.</span></label>
+      <label><input type="checkbox" data-key="s5c"><span class="label-text">Inspect the retrieved passages before reading the generated answer.</span></label>
+      <label><input type="checkbox" data-key="s5d"><span class="label-text">Test one answerable question and one question not supported by the source.</span></label>
+      <div class="checkpoint"><strong>Checkpoint:</strong> classify a weak answer as a retrieval failure, a generation failure, or insufficient source material.</div>
+    </section>
+
+    <section class="card">
+      <div class="time">6 · 30 minutes</div>
+      <h3>Grounding and guardrails</h3>
+      <label><input type="checkbox" data-key="s6a"><span class="label-text">Watch the generation video.</span></label>
+      <a class="resource" href="https://www.youtube.com/watch?v=Vw52xyyFsB8" target="_blank" rel="noreferrer">Part 4 - Generation <span class="badge">6:25</span></a>
+      <label><input type="checkbox" data-key="s6b"><span class="label-text">Review the prompt in <code>02_langchain_rag.py</code>.</span></label>
+      <label><input type="checkbox" data-key="s6c"><span class="label-text">Test: use only the context, cite sources, decline unsupported questions, and ignore instructions inside retrieved text.</span></label>
+      <a class="resource" href="https://docs.langchain.com/oss/python/langchain/guardrails" target="_blank" rel="noreferrer">LangChain guardrails overview <span class="badge">optional skim 5 min</span></a>
+      <div class="checkpoint"><strong>Checkpoint:</strong> explain why RAG reduces hallucination risk but does not guarantee correctness.</div>
+    </section>
+
+    <section class="card">
+      <div class="time">7 · 20 minutes</div>
+      <h3>Final workshop readiness</h3>
+      <label><input type="checkbox" data-key="s7a"><span class="label-text">Run <code>python check_setup.py --api</code>.</span></label>
+      <label><input type="checkbox" data-key="s7b"><span class="label-text">Restart VS Code, reopen the notebook, and rerun one cell.</span></label>
+      <label><input type="checkbox" data-key="s7c"><span class="label-text">Confirm API credit, charger, and the correct electrical plug adapter.</span></label>
+      <label><input type="checkbox" data-key="s7d"><span class="label-text">Write down two questions to ask during the workshop.</span></label>
+      <div class="checkpoint"><strong>Finish line:</strong> <span class="total">4 hours 30 minutes</span>, including the break.</div>
+    </section>
+  </div>
+
+  <h2>Linked learning materials</h2>
+  <div class="card">
+    <table class="resource-table">
+      <thead><tr><th>Material</th><th>Length</th><th>Use it for</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://www.youtube.com/watch?v=wd7TZ4w1mSw" target="_blank" rel="noreferrer">RAG From Scratch: Part 1</a></td><td>5:13</td><td>End-to-end architecture</td></tr>
+        <tr><td><a href="https://www.youtube.com/watch?v=bjb_EMsTDKI" target="_blank" rel="noreferrer">RAG From Scratch: Part 2</a></td><td>4:52</td><td>Loading, splitting, and embeddings</td></tr>
+        <tr><td><a href="https://www.youtube.com/watch?v=LxNVgdIz9sU" target="_blank" rel="noreferrer">RAG From Scratch: Part 3</a></td><td>5:14</td><td>Similarity search and retrieval</td></tr>
+        <tr><td><a href="https://www.youtube.com/watch?v=Vw52xyyFsB8" target="_blank" rel="noreferrer">RAG From Scratch: Part 4</a></td><td>6:25</td><td>Prompt construction and generation</td></tr>
+        <tr><td><a href="https://docs.langchain.com/oss/python/langchain/retrieval" target="_blank" rel="noreferrer">LangChain retrieval overview</a></td><td>Targeted reading</td><td>Core components and 2-step RAG</td></tr>
+        <tr><td><a href="https://developers.openai.com/api/docs/guides/embeddings" target="_blank" rel="noreferrer">OpenAI embeddings guide</a></td><td>Targeted reading</td><td>Embedding concepts and API usage</td></tr>
+        <tr><td><a href="https://github.com/facebookresearch/faiss/wiki/Getting-started" target="_blank" rel="noreferrer">FAISS getting started</a></td><td>Targeted reading</td><td>Index, add, and search</td></tr>
+        <tr><td><a href="https://docs.langchain.com/oss/python/langchain/knowledge-base" target="_blank" rel="noreferrer">LangChain semantic-search tutorial</a></td><td>Targeted reading</td><td>PDF-to-retriever workflow and minimal RAG</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Video runtimes and links verified September 21, 2026. Reading times are suggested limits so the full plan stays under five hours.</p>
+  </div>
+
+  <h2>Environment checklist</h2>
+  <div class="card">
+    <label><input type="checkbox" data-key="e1"><span class="label-text">Python virtual environment created.</span></label>
+    <label><input type="checkbox" data-key="e2"><span class="label-text">Microsoft Python and Jupyter VS Code extensions installed.</span></label>
+    <label><input type="checkbox" data-key="e3"><span class="label-text">Packages installed from <code>requirements.txt</code>.</span></label>
+    <label><input type="checkbox" data-key="e4"><span class="label-text"><code>.env</code> contains the API key and is ignored by Git.</span></label>
+    <label><input type="checkbox" data-key="e5"><span class="label-text">OpenAI API test succeeds.</span></label>
+    <label><input type="checkbox" data-key="e6"><span class="label-text">Laptop charger and location-appropriate electrical plug adapter packed.</span></label>
+  </div>
+
+  <h2>My notes</h2>
+  <div id="notes" class="notes" contenteditable="true" aria-label="Editable notes">Write your questions, observations, and workshop reminders here.</div>
+  <p class="small">This page uses local browser storage. Progress is saved for this exact file and browser profile; your notes do not leave the device.</p>
+  <button id="reset" type="button">Reset checklist and notes</button>
+</main>
+<script>
+  const boxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-key]'));
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+
+  const storage = {
+    get(key) {
+      try { return window.localStorage.getItem(key); } catch (_) { return null; }
+    },
+    set(key, value) {
+      try { window.localStorage.setItem(key, value); } catch (_) { /* storage unavailable */ }
+    },
+    remove(key) {
+      try { window.localStorage.removeItem(key); } catch (_) { /* storage unavailable */ }
+    }
+  };
+
+  function updateProgress() {
+    const complete = boxes.filter(box => box.checked).length;
+    const percent = boxes.length ? Math.round((complete / boxes.length) * 100) : 0;
+    progressFill.style.width = percent + '%';
+    progressText.textContent = `${complete} of ${boxes.length} complete (${percent}%)`;
+  }
+
+  boxes.forEach(box => {
+    box.checked = storage.get('rag-short-' + box.dataset.key) === '1';
+    box.addEventListener('change', () => {
+      storage.set('rag-short-' + box.dataset.key, box.checked ? '1' : '0');
+      updateProgress();
+    });
+  });
+
+  const notes = document.getElementById('notes');
+  const saved = storage.get('rag-short-notes');
+  if (saved !== null) notes.innerHTML = saved;
+  notes.addEventListener('input', () => storage.set('rag-short-notes', notes.innerHTML));
+
+  document.getElementById('reset').addEventListener('click', () => {
+    boxes.forEach(box => {
+      box.checked = false;
+      storage.remove('rag-short-' + box.dataset.key);
+    });
+    notes.textContent = 'Write your questions, observations, and workshop reminders here.';
+    storage.remove('rag-short-notes');
+    updateProgress();
+  });
+
+  updateProgress();
+</script>
+</body>
+</html>

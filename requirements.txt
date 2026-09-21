@@ -1,0 +1,17 @@
+# Core OpenAI and LangChain packages
+openai
+langchain
+langchain-core
+langchain-openai
+langchain-text-splitters
+langchain-community
+
+# Vector search and document parsing
+faiss-cpu
+numpy
+pypdf
+
+# Local development / notebooks
+python-dotenv
+jupyter
+ipykernel
