@@ -167,12 +167,6 @@ Do not pre-install large optional stacks such as `torch`, `sentence-transformers
 - Test one embedding request with `python check_setup.py --api`.
 - Test from the same laptop and network configuration you expect to use at the workshop.
 
-## What “socket adapter for your notebook” means
-
-Here, **notebook** means laptop computer. A **socket adapter** means an electrical travel plug adapter that lets your laptop charger fit the wall outlets at the workshop location. It is not a Python, network, or software adapter.
-
-Check the venue's country and your charger label. Most modern laptop chargers accept `100-240 V, 50/60 Hz`, so they usually need only the appropriate plug-shape adapter, not a voltage converter.
-
 ## Files in this kit
 
 - `prep_plan.html` - interactive under-5-hour checklist with direct learning links
