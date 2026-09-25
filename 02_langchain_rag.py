@@ -13,7 +13,7 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__name__).resolve().parent
 DATA_PATH = ROOT / "data" / "workshop_handbook.txt"
 
 SYSTEM_PROMPT = """You answer questions only from the supplied context.
